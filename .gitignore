@@ -1,0 +1,9 @@
+__pycache__/
+*.py[cod]
+.venv/
+data/kaggle/
+archive/Infectious Skin Lesion Dataset/
+backend/models/
+*.pt
+*.pth
+*.onnx

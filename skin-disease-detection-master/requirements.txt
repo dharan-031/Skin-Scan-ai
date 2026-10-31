@@ -1,0 +1,5 @@
+Flask>=3.0,<4
+Pillow>=10,<12
+tensorflow==2.16.2
+tf-keras==2.16.0
+gunicorn>=22,<24

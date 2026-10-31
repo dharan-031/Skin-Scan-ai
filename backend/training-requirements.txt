@@ -1,0 +1,4 @@
+# Install alongside backend/requirements.txt in the existing virtual environment.
+torch>=2.14.1,<3
+torchvision>=0.29.1,<1
+scikit-learn>=1.8,<2

@@ -1,0 +1,6 @@
+{
+  "name": "Focus Studio - Deep Work & Flow Timer",
+  "description": "An interactive, beautifully crafted Pomodoro flow timer, micro-task planner, ambient soundscapes, and anti-procrastination toolkit.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

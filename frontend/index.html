@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1510">
+  <meta name="description" content="A private, local skin photo screening aid with cautious next-step guidance.">
+  <title>SkinScan AI · Private skin screening</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <div class="ambient ambient-one" aria-hidden="true"></div>
+  <div class="ambient ambient-two" aria-hidden="true"></div>
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="SkinScan AI home">
+      <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M16 5v22M5 16h22M8.2 8.2l15.6 15.6m0-15.6L8.2 23.8"/></svg></span>
+      <span class="brand-copy"><strong>SkinScan <b>AI</b></strong><small>A PRIVATE FIRST LOOK</small></span>
+    </a>
+    <div class="header-meta"><span class="privacy-pill"><i></i> Your photo stays here</span><span class="header-divider"></span><span class="model-label">Runs on this device</span></div>
+  </header>
+
+  <main class="app-shell">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow"><span></span> LET’S TAKE A CLOSER LOOK</p>
+        <h1>Not sure about<br>a skin change?<br><em>Let’s look together.</em></h1>
+        <p class="hero-description">Share a clear photo. We’ll describe what we can see, talk through a few possibilities, and suggest a sensible next step.</p>
+        <div class="hero-points"><span><b>01</b> Share a photo</span><span><b>02</b> See what stands out</span><span><b>03</b> Find a next step</span></div>
+      </div>
+      <aside class="privacy-card">
+        <div class="privacy-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3 5 6v5c0 4.6 2.9 8.4 7 10 4.1-1.6 7-5.4 7-10V6l-7-3Z"/><path d="m9 12 2 2 4-4"/></svg></div>
+        <div><span class="privacy-title">Your photo stays on this device</span><p>It’s checked here, held only in memory, and never sent to the cloud.</p></div>
+      </aside>
+    </section>
+
+    <div class="workspace-grid">
+      <section class="card scan-card" aria-labelledby="photo-heading">
+        <div class="section-heading">
+          <span class="step-number">01</span>
+          <div><h2 id="photo-heading">Start with a photo</h2><p>A clear, well-lit photo helps us see the area better.</p></div>
+        </div>
+
+        <div id="dropzone" class="dropzone" tabindex="0" role="button" aria-label="Choose or drop a skin photo">
+          <span class="upload-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5"/><path d="M5 14v5h14v-5"/></svg></span>
+          <strong>Drop a photo here</strong>
+          <span class="dropzone-hint">or choose one from your device</span>
+          <span class="file-types">JPG, PNG or WebP <i>·</i> up to 12 MB</span>
+          <input id="fileInput" type="file" accept="image/jpeg,image/png,image/webp" hidden>
+        </div>
+
+        <div class="photo-actions">
+          <button id="cameraButton" class="button secondary" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h3l1.5-2h7L17 7h3v12H4z"/><circle cx="12" cy="13" r="3.5"/></svg> Take a photo</button>
+          <button id="browseButton" class="button secondary" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6.5A1.5 1.5 0 0 1 5.5 5H10l2 2h6.5A1.5 1.5 0 0 1 20 8.5v9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 17.5z"/><path d="m7 15 3-3 2 2 2-2 3 3"/></svg> Choose a photo</button>
+        </div>
+
+        <div id="cameraWrap" class="camera-wrap" hidden>
+          <video id="video" autoplay playsinline aria-label="Live camera preview"></video>
+          <div class="camera-actions"><span>Hold steady and center the area you want us to see.</span><div><button id="cancelCameraButton" class="text-button" type="button">Close camera</button><button id="captureButton" class="button primary" type="button">Take photo</button></div></div>
+        </div>
+        <div id="previewWrap" class="preview-wrap" hidden>
+          <img id="preview" alt="Selected skin photo preview">
+          <div class="preview-meta"><span><i></i> Photo ready to review</span><button id="removeButton" class="text-button" type="button">Remove photo</button></div>
+        </div>
+
+        <div class="divider"></div>
+        <label class="field-label" for="context">What have you noticed? <span>OPTIONAL</span></label>
+        <p class="field-hint">A little context can help. Share only what you’re comfortable with.</p>
+        <textarea id="context" maxlength="1000" placeholder="When did it start? Does it itch or hurt? Has it spread? Any fever or new products?"></textarea>
+        <button id="analyzeButton" class="button primary analyze" type="button" disabled>Take a closer look <span aria-hidden="true">→</span></button>
+        <p class="privacy-footnote"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 5 6v5c0 4.6 2.9 8.4 7 10 4.1-1.6 7-5.4 7-10V6l-7-3Z"/><path d="m9 12 2 2 4-4"/></svg> Your photo is checked here and isn’t saved.</p>
+        <div id="error" class="error" role="alert" hidden></div>
+      </section>
+
+      <aside class="side-panel">
+        <section class="guide-card">
+          <div class="guide-heading"><span class="guide-icon" aria-hidden="true">✦</span><div><p class="guide-kicker">A FEW QUICK TIPS</p><h2>For a helpful photo</h2></div></div>
+          <ul class="guide-list"><li><span>01</span><div><b>Find good light</b><small>Daylight near a window works well.</small></div></li><li><span>02</span><div><b>Keep your phone steady</b><small>Wait until the area looks in focus.</small></div></li><li><span>03</span><div><b>Frame just the skin area</b><small>Keep faces and personal details out.</small></div></li></ul>
+        </section>
+        <section class="expect-card">
+          <span class="expect-mark" aria-hidden="true">i</span><div><h2>A helpful first step</h2><p>This can suggest possibilities, but it can’t tell you for sure what’s causing a skin change. A clinician can.</p></div>
+        </section>
+      </aside>
+
+      <section id="result" class="result" hidden aria-live="polite"></section>
+    </div>
+  </main>
+
+  <footer class="site-footer"><span>SkinScan AI</span><i></i><span>Your photo stays here</span><i></i><span>A helpful first look</span></footer>
+  <script src="/static/app.js" defer></script>
+</body>
+</html>
